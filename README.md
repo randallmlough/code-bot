@@ -103,12 +103,16 @@ type bar struct{}
 Note how I am priming the bot to understand the projects file structure and file paths, and how I prime it to use the metadata for the package name. This back and forth conversation example has worked really well so far. 
 
 ## Roadmap
-- [x] OpenAI function calling
 - [x] Internal plugin implementation
+- [x] OpenAI function calling
 - [x] Enhanced plugin capabilities
   - [x] Inject system prompts: this allows the developer to prime the bot with examples and additional context on what they or the plugin will do. 
   - [x] Add pre-flight messages / conversation: this appears to improve the bots context of what is being asked of them by "faking" a conversation.
-- [ ] CLI chat loop
+- [ ] CLI chat ux
+  - [x] remove default invocation
+  - [x] cleaning printing
+  - [x] better message response
+  - [ ] chat loop
 - [ ] Additional plugin Functionality
   - [ ] Handle multiple files 
   - [ ] Create specific kind of files
