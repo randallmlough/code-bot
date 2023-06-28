@@ -1,0 +1,1 @@
+Convert this into a Go struct and create a file in the validator package
