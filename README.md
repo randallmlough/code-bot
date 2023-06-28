@@ -14,17 +14,17 @@ A GPT bot that tries to be a useful coding assistant.
 The goal of this project is to have a coding bot that can answer your coding questions and understand your current project.
 
 ## Features
-Leverages OpenAI Function calling by its powerful plugin implementation. Developers can create plugins that do almost anything they want to do with the results from a chat bot.
+Leverages OpenAI Function Calling from its powerful plugin implementation. Developers can create plugins that do almost anything they want to do with the results from a chat bot.
 
 Available plugins:
 - [x] Coding style guide
 - [x] Creating or updating a file
 
+## Installation
 ### Requirements 
 - Go 1.21 (uses new features)
 - OpenAI API token 
 
-### Installation
 ```shell
 $ OPENAI_TOKEN=[REPLACE_WITH_TOKEN] >> backend/.env # only necessary if you are developing locally
 $ make build/cli # build the cli tool
