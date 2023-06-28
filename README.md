@@ -61,10 +61,14 @@ Until then,
 
 ### Understanding project structure
 #### Problem
-Get the assistant to understand project structure, specifically, what the package name should be for a file. Always wants to give it "package main" when other files in that directory are "package XXX".
+Get the assistant to understand project structure, specifically, what the package name should be for a file. The bot always wants to give it "package main" when other files in that directory are "package XXX".
 
 #### Solution / workaround
-Give the bot a mock conversational example 
+Give the bot a mock conversation that is added to the system prompt.
+
+example:
+system prompt: below is an example conversation from the users project structure
+
 ```markdown
 [//]: # (project structure)
 | Name | Filepath | Is Directory | Size | Last Modified | Metadata |
@@ -76,6 +80,7 @@ Give the bot a mock conversational example
 | read.go | internal/file/read.go | false | 216 | 2023-06-27 11:31:18.045689437 -0700 PDT | {"package_name":"package file"} |
 | write.go | internal/file/write.go | false | 297 | 2023-06-25 20:23:02.117814613 -0700 PDT | {"package_name":"package file"} |
 ```
+```shell
 user: what's the file path for the errors file in the api directory?
 assistant: cmd/api/errors.go
 user: What is the package name for the api directory?
@@ -84,14 +89,14 @@ user: What is the package name for the file directory?
 assistant: package file
 user: create foo.go in the file package
 assistant: I created the file internal/file/foo.go here is its contents
-```go 
+
 package file
 
 type foo struct{}
-```
+
 user: create bar.go in the api directory
 assistant: I created the file cmd/api/bar.go here is its contents
-```go 
+ 
 package main
 
 type bar struct{}
