@@ -33,18 +33,9 @@ $ make build/cli # build the cli tool
 
 #### Running, Prompts and commands
 ```shell
-$ OPENAI_TOKEN=[REPLACE_WITH_TOKEN] bin/cli -p link-to-your-prompt.md -i # to run the cli tool
+$ export OPENAI_TOKEN=[REPLACE_WITH_TOKEN] 
+$ bin/cli -p link-to-your-prompt.md -i link-to-optional-input-file.ts
 ```
-Edit files in `testdata/` to tell the cli tool what to do. 
-> ⚠️ **NOTE** ⚠️
->
-> This behavior will be deprecated very soon in favor of a much more organic and fluid process. This has just been the easiest way for me to build and test the bot rapidly.
-
-## Examples 
-
-### File conversion
-Prompt: Convert this into a Go struct and create a file in the validator package
-
 
 ## Challenges
 
