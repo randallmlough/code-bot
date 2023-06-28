@@ -79,8 +79,7 @@ system prompt: below is an example conversation from the users project structure
 | errors.go | cmd/api/errors.go | false | 1905 | 2023-06-21 20:13:35.06768917 -0700 PDT | {"package_name":"package main"} |
 | read.go | internal/file/read.go | false | 216 | 2023-06-27 11:31:18.045689437 -0700 PDT | {"package_name":"package file"} |
 | write.go | internal/file/write.go | false | 297 | 2023-06-25 20:23:02.117814613 -0700 PDT | {"package_name":"package file"} |
-```
-```shell
+
 user: what's the file path for the errors file in the api directory?
 assistant: cmd/api/errors.go
 user: What is the package name for the api directory?
@@ -101,6 +100,8 @@ package main
 
 type bar struct{}
 ```
+
+Note how I am priming the bot to understand the projects file structure and file paths, and how I prime it to use the metadata for the package name. This back and forth conversation example has worked really well so far. 
 
 ## Roadmap
 - [x] OpenAI function calling
