@@ -9,20 +9,18 @@ import (
 
 func main() {
 	app := &cli.App{
-		Name:  "take-this",
-		Usage: "takes an input and prompt and does something with it using GPT",
+		Name:  "code-bot",
+		Usage: "a helpful coding assistant",
 		Flags: []cli.Flag{
 			&cli.StringFlag{
-				Name:     "input",
-				Aliases:  []string{"i"},
-				Usage:    "the source input",
-				FilePath: "testdata/input.ts",
+				Name:    "input",
+				Aliases: []string{"i"},
+				Usage:   "input",
 			},
 			&cli.StringFlag{
-				Name:     "prompt",
-				Aliases:  []string{"p"},
-				Usage:    "the prompt for what to do with the input",
-				FilePath: "testdata/prompt.txt",
+				Name:    "prompt",
+				Aliases: []string{"p"},
+				Usage:   "the prompt for what to do with the input",
 			},
 		},
 		Action: Action,
