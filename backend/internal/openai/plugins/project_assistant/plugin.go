@@ -7,61 +7,65 @@ import (
 	"github.com/mitchellh/mapstructure"
 	"github.com/randallmlough/code-bot/internal/file"
 	"github.com/randallmlough/code-bot/internal/openai"
+	gogpt "github.com/sashabaranov/go-openai"
 )
 
 //go:embed system_prompt.md
 var content embed.FS
 
 const (
-	pluginName  = "project_assistant"
+	PluginName  = "project_assistant"
 	description = "it manages files on the local machine"
 )
 
 type ProjectAssistant struct {
-	projectTree  files
-	systemPrompt string
 }
 
 func New() *ProjectAssistant {
-	ff, err := GetFileStructure(".")
-	if err != nil {
-		panic(fmt.Errorf("failed to walk the project structure: %w", err))
-	}
-	prompt, err := generateSystemPrompt()
-	if err != nil {
-		panic(err)
-	}
-	return &ProjectAssistant{
-		projectTree:  ff,
-		systemPrompt: prompt,
-	}
+	return &ProjectAssistant{}
 }
 
 func (p *ProjectAssistant) Name() string {
-	return pluginName
+	return PluginName
 }
 
 func (p *ProjectAssistant) Description() string {
 	return description
 }
 
-func (p *ProjectAssistant) UserMessage() string {
-	prompt := "\nCurrent project structure: ###\n"
-	prompt += p.projectTree.MarkdownTable()
-	prompt += "\n###\n"
+func (p *ProjectAssistant) Messages() []gogpt.ChatCompletionMessage {
+	prompt := "\n<project structure>\n"
+	prompt += generateProjectTable()
+	prompt += "\n</project structure>\n"
+
+	um := openai.NewUserMessage(prompt)
+	am := openai.NewAssistantMessage("I have stored your project structure and ready to utilize it.")
+
+	return []gogpt.ChatCompletionMessage{um, am}
+}
+
+func (p *ProjectAssistant) SystemPrompt() string {
+	prompt, err := generateSystemPrompt()
+	if err != nil {
+		panic(err)
+	}
+
 	return prompt
+}
+func generateProjectTable() string {
+	ff, err := GetFileStructure(".")
+	if err != nil {
+		panic(fmt.Errorf("failed to walk the project structure: %w", err))
+	}
+	return ff.MarkdownTable()
 }
 
 func generateSystemPrompt() (string, error) {
 	prompt, err := file.ReadEmbededFile(content, "system_prompt.md")
 	if err != nil {
-		return "", fmt.Errorf("%s plugin failed to read the system prompt: %w", pluginName, err)
+		return "", fmt.Errorf("%s plugin failed to read the system prompt: %w", PluginName, err)
 	}
 	return prompt, nil
-}
-
-func (p *ProjectAssistant) SystemPrompt() string {
-	return p.systemPrompt
 }
 
 type Args struct {

@@ -1,5 +1,5 @@
 # Coding Bot
-A GPT bot that tries to be a useful coding assistant.
+A GPT bot that tries to be a useful coding assistant by automating your common tasks.
 
 
 > ⚠️ **NOTE** ⚠️
@@ -58,6 +58,17 @@ Until then,
 - A bot should never completely overwrite a file, unless explicitly told to.
 - A bot should never overwrite the contents of the file, instead it should append it.
 
+### Context Length
+#### Problem
+Since LLMs do not possess inherent memory and rely on tokens as their source of memory, it is common to provide an agent with sufficient information in the system prompt or messages. This enables the agent to build context and pattern recognition necessary to respond appropriately to a given question. However, it is important to note that most LLMs, including OpenAI models used in this repository, have a token limit of 4,000. It may be surprising how quickly these tokens are consumed when dealing with files.
+
+#### Solution / workaround
+Like the previous problem this is hard to get around since it's a current technical limitation with most LLMs. But there are some ways to reduce the amount of tokens through some prompt engineering tricks and leveraging embeddings.
+
+Techniques and strategies being investigated.
+- [ ] Improve conversations via a "[select and query](https://martinfowler.com/articles/building-boba.html#carry-context)" strategy
+- [ ] Leverage embeddings with a vector database
+
 ### Understanding project structure
 #### Problem
 Get the assistant to understand project structure, specifically, what the package name should be for a file. The bot always wants to give it "package main" when other files in that directory are "package XXX".
@@ -108,11 +119,11 @@ Note how I am priming the bot to understand the projects file structure and file
 - [x] Enhanced plugin capabilities
   - [x] Inject system prompts: this allows the developer to prime the bot with examples and additional context on what they or the plugin will do. 
   - [x] Add pre-flight messages / conversation: this appears to improve the bots context of what is being asked of them by "faking" a conversation.
-- [ ] CLI chat ux
+- [x] CLI chat ux
   - [x] remove default invocation
   - [x] cleaning printing
   - [x] better message response
-  - [ ] chat loop
+  - [x] chat loop
 - [ ] Additional plugin Functionality
   - [ ] Handle multiple files 
   - [ ] Create specific kind of files
@@ -120,6 +131,9 @@ Note how I am priming the bot to understand the projects file structure and file
     - services
     - repository
     - views or project
-  - [ ] Start 
+- [ ] Context / Token utilization improvements
+  - [ ] Implement prompt optimization strategies 
+    -  Select and query
+  - [ ] Implement embeddings / vector database
 - [ ] API implementation
 - [ ] Web application

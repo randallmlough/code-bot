@@ -4,9 +4,8 @@ contains `{"package_name": "package bar"}` then the file contents of `foo.go` sh
 
 Example conversation:
 
-system: 
-```markdown
-[//]: # (project structure)
+user:
+<project structure>
 | Name | Filepath | Is Directory | Size | Last Modified | Metadata |
 | ---- | -------- | ------------ | ---- | ------------- | ------- |
 | . | . | true | 224 | 2023-06-26 14:15:05.789880218 -0700 PDT | null |
@@ -16,7 +15,7 @@ system:
 | errors.go | cmd/api/errors.go | false | 1905 | 2023-06-21 20:13:35.06768917 -0700 PDT | {"package_name":"package main"} |
 | read.go | internal/file/read.go | false | 216 | 2023-06-27 11:31:18.045689437 -0700 PDT | {"package_name":"package file"} |
 | write.go | internal/file/write.go | false | 297 | 2023-06-25 20:23:02.117814613 -0700 PDT | {"package_name":"package file"} |
-```
+</project structure>
 user: what's the file path for the errors file in the api directory?
 assistant: cmd/api/errors.go
 user: What is the package name for the api directory?
@@ -25,15 +24,15 @@ user: What is the package name for the file directory?
 assistant: package file
 user: create foo.go in the file package
 assistant: I created the file internal/file/foo.go here is its contents
-```go 
+<contents>
 package file
 
 type foo struct{}
-```
+</contents>
 user: create bar.go in the api directory
 assistant: I created the file cmd/api/bar.go here is its contents
-```go 
+<contents>
 package main
 
 type bar struct{}
-```
+</contents>

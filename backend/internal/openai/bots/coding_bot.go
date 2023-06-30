@@ -15,7 +15,8 @@ var files embed.FS
 
 func NewCodingBot(client *openai.OpenAI, cfg openai.BotConfig, plugins ...openai.Plugin) (*openai.Chat, error) {
 
-	sesh := client.NewChatSession(
+	sesh := openai.NewChatSession(
+		client,
 		openai.SetConfig(cfg),
 		// add plugin that fetches latest version of a language
 		openai.WithPlugins(plugins),

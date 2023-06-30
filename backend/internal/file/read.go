@@ -2,12 +2,10 @@ package file
 
 import (
 	"embed"
-	"fmt"
 	"os"
 )
 
 func ReadFile(filename string) (string, error) {
-	fmt.Println(os.Getwd())
 	bytes, err := os.ReadFile(filename)
 	if err != nil {
 		return "", err
